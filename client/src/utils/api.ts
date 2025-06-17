@@ -10,7 +10,6 @@ export const apiCall = async (endpoint: string, options: RequestInit = {}) => {
       ...options.headers,
     },
   };
-  console.log(import.meta.env )
   const response = await fetch(`${import.meta.env.VITE_SERVER}/api${endpoint}`, config);
   
   if (!response.ok) {
