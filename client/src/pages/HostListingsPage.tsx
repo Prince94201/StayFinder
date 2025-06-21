@@ -23,10 +23,11 @@ const HostListingsPage: React.FC = () => {
   const fetchListings = async () => {
     setLoading(true);
     try {
-      const data = await apiCall('/listings');
+      const data = await apiCall(`/listings`);
       // Filter to only show user's listings
       console.log('Fetched listings:', data);
-      const userListings = data.data.filter((listing: Listing) => String(listing.hostId) === String(user?.id));
+      console.log('Current user:', user);
+      const userListings = data.data.filter((listing: Listing) => String(listing.host?.id) === String(user?.id));
       setListings(userListings);
     } catch (error) {
       toast({
