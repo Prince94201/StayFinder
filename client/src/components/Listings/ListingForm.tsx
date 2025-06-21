@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -26,6 +25,9 @@ const ListingForm: React.FC = () => {
     location: '',
     amenities: [] as string[],
     images: [] as string[],
+    maxGuests: '',
+    bedrooms: '',
+    bathrooms: '',
   });
   const [newAmenity, setNewAmenity] = useState('');
   const [newImage, setNewImage] = useState('');
@@ -48,6 +50,9 @@ const ListingForm: React.FC = () => {
         location: listing.location,
         amenities: listing.amenities,
         images: listing.images,
+        maxGuests: listing.maxGuests?.toString() || '',
+        bedrooms: listing.bedrooms?.toString() || '',
+        bathrooms: listing.bathrooms?.toString() || '',
       });
     } catch (error) {
       toast({
@@ -73,6 +78,9 @@ const ListingForm: React.FC = () => {
         location: formData.location,
         amenities: formData.amenities,
         images: formData.images,
+        maxGuests: parseInt(formData.maxGuests, 10),
+        bedrooms: parseInt(formData.bedrooms, 10),
+        bathrooms: parseInt(formData.bathrooms, 10),
       };
 
       if (isEditing) {
@@ -206,6 +214,45 @@ const ListingForm: React.FC = () => {
                 onChange={(e) => setFormData(prev => ({ ...prev, location: e.target.value }))}
                 required
                 placeholder="City, Country"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <Label htmlFor="maxGuests">Max Guests</Label>
+              <Input
+                id="maxGuests"
+                type="number"
+                min="1"
+                value={formData.maxGuests}
+                onChange={(e) => setFormData(prev => ({ ...prev, maxGuests: e.target.value }))}
+                required
+                placeholder="Number of guests"
+              />
+            </div>
+            <div>
+              <Label htmlFor="bedrooms">Bedrooms</Label>
+              <Input
+                id="bedrooms"
+                type="number"
+                min="0"
+                value={formData.bedrooms}
+                onChange={(e) => setFormData(prev => ({ ...prev, bedrooms: e.target.value }))}
+                required
+                placeholder="Number of bedrooms"
+              />
+            </div>
+            <div>
+              <Label htmlFor="bathrooms">Bathrooms</Label>
+              <Input
+                id="bathrooms"
+                type="number"
+                min="0"
+                value={formData.bathrooms}
+                onChange={(e) => setFormData(prev => ({ ...prev, bathrooms: e.target.value }))}
+                required
+                placeholder="Number of bathrooms"
               />
             </div>
           </div>

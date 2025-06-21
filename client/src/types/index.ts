@@ -1,4 +1,3 @@
-
 export interface User {
   id: string;
   name: string;
@@ -19,6 +18,9 @@ export interface Listing {
   isActive: boolean;
   createdAt: string;
   updatedAt: string;
+  maxGuests: number;
+  bedrooms: number;
+  bathrooms: number;
 }
 
 export interface Booking {
